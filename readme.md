@@ -25,7 +25,26 @@
 - 모든 화면은 사용자 편의성을 위해 GUI로 구성한다.
 
 ### 클래스 설계
-	
+- **com.codefty.library.book** 패키지<br>도서의 등록, 수정, 삭제 전반과 관련되어 있는 패키지 이다.
+	- Book.java  : 도서 등록, 수정 항목 DTO(Data Transfer Object)
+	- RegisterBook.java : 도서 등록 기능 설계
+		```java
+		public interface RegisterBook {
+			boolean register();
+		}
+		```
+	- UpdateBook.java : 도서 수정 기능 설계
+		```java
+		public interface UpdateBook {
+			boolean update();
+		}
+		```
+	- DeleteBook.java : 도서 삭제 기능 설계
+		```java
+		public interface DeleteBook {
+			boolean delete();
+		}
+		```
 
 		
 		
