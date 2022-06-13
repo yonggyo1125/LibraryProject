@@ -6,5 +6,5 @@ package com.codefty.library.book;
  * @author YONGGYO
  */
 public interface DeleteBook {
-	boolean delete();
+	boolean delete(Book book);
 }
