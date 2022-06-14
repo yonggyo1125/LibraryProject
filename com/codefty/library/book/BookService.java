@@ -24,5 +24,4 @@ public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 
 		return false;
 	}
-
 }

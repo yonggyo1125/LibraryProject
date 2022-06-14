@@ -13,11 +13,17 @@ public class GraphicUserInterface extends JFrame {
 		
 		JTabbedPane jtp = new JTabbedPane(JTabbedPane.TOP);
 		jtp.addTab("대여/반납관리", new BookManagerUI());
-		jtp.addTab("도서 관리", new BookManagerUI());
+		jtp.addTab("도서관리", new BookManagerUI());
 		add(jtp, BorderLayout.CENTER);
 		
-		setSize(900, 800);
+		setSize(600, 500);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		try {
+			throw new com.codefty.library.common.CommonException(this, "테스트 메세지");
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 }

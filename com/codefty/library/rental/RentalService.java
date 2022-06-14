@@ -20,5 +20,4 @@ public class RentalService implements RentBook, ReturnBook {
 		
 		return false;
 	}
-
 }
