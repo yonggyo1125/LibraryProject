@@ -1,5 +1,6 @@
 package com.codefty.library.book;
 
+import java.io.Serializable;
 import com.codefty.library.common.RentalStatus;
 
 /**
@@ -7,7 +8,10 @@ import com.codefty.library.common.RentalStatus;
  * 
  * @author YONGGYO
  */
-public class Book {
+public class Book implements Serializable {
+	
+	private static final long serialVersionUID = -3582370035375635944L;
+	
 	private long serialNum; // 도서 일련번호
 	private String title; // 도서명
 	private String publisher; // 출판사

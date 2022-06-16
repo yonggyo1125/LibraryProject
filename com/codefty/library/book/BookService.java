@@ -8,20 +8,17 @@ package com.codefty.library.book;
 public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 
 	@Override
-	public boolean update(Book book) {
-
-		return false;
+	public void update(Book book) {
+		BookDao.getInstance().update(book);
 	}
 
 	@Override
-	public boolean register(Book book) {
-
-		return false;
+	public void register(Book book) {
+		BookDao.getInstance().register(book);
 	}
 
 	@Override
-	public boolean delete(Book book) {
-
-		return false;
+	public void delete(Book book) {
+		BookDao.getInstance().delete(book);
 	}
 }
