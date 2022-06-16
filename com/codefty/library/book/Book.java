@@ -1,5 +1,7 @@
 package com.codefty.library.book;
 
+import com.codefty.library.common.RentalStatus;
+
 /**
  * Book DTO(Data Transfer Object)
  * 
@@ -11,6 +13,7 @@ public class Book {
 	private String publisher; // 출판사
 	private String author; // 저자
 	private int rentalDays; // 도서의 대출 가능 일수 
+	private RentalStatus status; // 대여 상태 
 	
 	public Book(long serialNum, String title, String publisher, String author, int rentalDays) {
 		this.serialNum = serialNum;
@@ -18,8 +21,18 @@ public class Book {
 		this.publisher = publisher;
 		this.author = author;
 		this.rentalDays = rentalDays;
+		this.status = RentalStatus.READY; // 대기중(기본값) 
 	}
-
+	
+	public Book(long serialNum, String title, String publisher, String author, int rentalDays, RentalStatus status) {
+		this.serialNum = serialNum;
+		this.title = title;
+		this.publisher = publisher;
+		this.author = author;
+		this.rentalDays = rentalDays;
+		this.status = status;
+	}
+	
 	public long getSerialNum() {
 		return serialNum;
 	}
@@ -60,9 +73,17 @@ public class Book {
 		this.rentalDays = rentalDays;
 	}
 
+	public RentalStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(RentalStatus status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [serialNum=" + serialNum + ", title=" + title + ", publisher=" + publisher + ", author=" + author
-				+ ", rentalDays=" + rentalDays + "]";
+				+ ", rentalDays=" + rentalDays + ", status=" + status + "]";
 	}
 }
