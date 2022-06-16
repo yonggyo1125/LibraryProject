@@ -59,7 +59,6 @@ public class BookManagerUI extends JPanel implements ActionListener {
 		add(contentBox, BorderLayout.CENTER);
 		
 		/** 컴포넌트를 교체한 경우는 화면에 다시 그려줘야 한다. */
-		revalidate(); 
-		repaint();
+		updateUI();
 	}
 }
