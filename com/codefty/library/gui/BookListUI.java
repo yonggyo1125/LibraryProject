@@ -19,6 +19,7 @@ public class BookListUI extends JPanel implements ActionListener {
 	JComboBox<String> searchOpts;
 	JTextField searchField;
 	JButton searchBtn;
+	JCheckBox[] statusSeach;
 	JTable searchResults;
 	
 	public BookListUI() {
@@ -35,12 +36,23 @@ public class BookListUI extends JPanel implements ActionListener {
 		searchOpts = new JComboBox<>(opts);
 		topBox.add(searchOpts);
 		
-		searchField = new JTextField(20);
+		searchField = new JTextField(15);
 		topBox.add(searchField);
 		
-		searchBtn = new JButton("검색하기");
+		searchBtn = new JButton("검색");
+		searchBtn.setPreferredSize(new Dimension(65, 25));
 		searchBtn.addActionListener(this);
 		topBox.add(searchBtn);
+		
+		/** 대여 상태 검색 추가 S */
+		RentalStatus[] statuses = RentalStatus.values();
+		statusSeach = new JCheckBox[statuses.length];
+		for (int i = 0; i < statuses.length; i++) {
+			statusSeach[i] = new JCheckBox(statuses[i].getStatusStr());
+			statusSeach[i].setBackground(Color.WHITE);
+			topBox.add(statusSeach[i]);
+		}
+		/** 대여 상태 검색 추가 E */
 		
 		wrapBox.add(topBox, BorderLayout.NORTH);	
 		/** 도서 검색 영역 E */
@@ -57,14 +69,23 @@ public class BookListUI extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == searchBtn) {		
-			// 검색 조건 및 키워드 추출
+		
 			try {
+				// 검색 조건 및 키워드 추출
 				String sopt = (String)searchOpts.getSelectedItem();
 				String skey = searchField.getText();
 				// 검색어가 비어 있는 경우는 알림 메세지 
 				if (skey == null || skey.trim().equals("")) {
 					throw new CommonException(this, "검색 키워드를 입력하세요");
 				}
+				
+				// 선택된 대여 상태
+				ArrayList<String> selectedStatus = new ArrayList<>();
+				for(JCheckBox chk : statusSeach) {
+					if (chk.isSelected()) {
+						selectedStatus.add(chk.getText());
+					}
+				} 
 				
 				/**
 				 * 하기 코드는 검색 담당 작업자가 처리해 주세요
