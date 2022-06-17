@@ -119,7 +119,7 @@ public class BookFormUI extends JPanel implements ActionListener {
 				return;
 			}
 			
-			BookService bookSvc = new BookService();
+			BookService bookSvc = BookService.getInstance();
 			Book book = getBookInfo();
 						
 			if (e.getSource() == modifyBtn) { // 수정하기 
@@ -158,18 +158,12 @@ public class BookFormUI extends JPanel implements ActionListener {
 	 * @throws {CommonException} 도서 정보가 없는 경우
 	 */
 	private void updateBookInfo(long serialNum) {
-		// 실제 저장된 도서 정보를 가져오는 부분을 담당하시는 분이 구현해 주세요.
-		/** 
-	    Book book =  ...
-		if (book == null) {
-			throw CommonException(this, "등록되지 않은 도서입니다.");
-		}
+		Book book = BookService.getInstance().get(serialNum);
 		
 		bookTitle.setText(book.getTitle());
 		publisher.setText(book.getPublisher());
 		author.setText(book.getAuthor());
 		rentalDays.setSelectedItem(book.getRentalDays());
-		*/
 	}
 	
 	private void validateForm() {

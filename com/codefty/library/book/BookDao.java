@@ -118,6 +118,56 @@ public class BookDao {
 	}
 	
 	/**
+	 * 도서 존재 유무 체크 
+	 * 
+	 * @param book
+	 * @return {boolean}
+	 */
+	public boolean isBookExists(Book book) {
+		if (book == null) {
+			return false;
+		}
+		
+		return isBookExists(book.getSerialNum());
+	}
+	
+	/**
+	 * 일련 번호로 도서 존재 유무 체크 
+	 *  
+	 * @param serialNum
+	 * @return {boolean}
+	 */
+	public boolean isBookExists(long serialNum) {
+		Book book = get(serialNum);
+		
+		return book != null;
+	}
+	
+	/**
+	 * 일련번호로 도서 조회
+	 * 
+	 * @param serialNum
+	 * @return {Book}
+	 */
+	public Book get(long serialNum) {
+		for (Book book : books) {
+			if (book.getSerialNum() == serialNum) {
+				return book;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 전체 도서 목록 조회
+	 * 
+	 */
+	public List<Book> gets() {
+		return books;
+	}
+	
+	/**
 	 * 싱글톤(SingleTon) 방식으로 객체 반환
 	 * 
 	 * @return
