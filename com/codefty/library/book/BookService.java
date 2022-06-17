@@ -11,7 +11,7 @@ public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 	
 	private BookDao bookDao;
 	
-	public BookService() {
+	private BookService() {
 		bookDao = BookDao.getInstance();
 	}
 	
@@ -76,7 +76,7 @@ public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 	/**
 	 * ½Ì±ÛÅæ(SingleTon) ¹æ½ÄÀ¸·Î °´Ã¼ ¹ÝÈ¯
 	 * 
-	 * @return
+	 * @return BookService
 	 */
 	public static BookService getInstance() {
 		if (instance == null ) {

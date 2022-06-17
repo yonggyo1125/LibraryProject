@@ -15,7 +15,7 @@ import com.codefty.library.common.*;
  */
 public class RentalManagerUI extends JPanel implements ActionListener {
 	
-	JPanel topBox, contentBox;
+	JPanel topBox, contentBox, resultBox;
 	JTextField serialNumBox;
 	JLabel serialNumTxt, statusTxt, bookTitle, publisher, author, rentalDays;
 	JButton searchBtn, actionBtn;
@@ -89,8 +89,7 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 	/**
 	 * 조회결과 업데이트
 	 */
-	private void updateSearchResult() {
-				
+	private void updateSearchResult() {		
 		String serialNumStr = serialNumBox.getText();
 		if (serialNumStr.isBlank()) {
 			throw new CommonException(this, "조회할 일련번호를 입력하세요.");
@@ -102,16 +101,17 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 		} catch (NumberFormatException e) {
 			throw new CommonException(this, "일련번호는 숫자만 입력하세요.");
 		}
-		
-		// 대여, 반납 기능 구현 담당자가 처리해 주세요.
-		Book book =  new Book(1000, "책이름", "출판사", "저자", 3); // 임시
-		if (book == null) {
-			//throw new CommonException(this, "등록되지 않은 일련번호 입니다.");
-		}
 	
+		// 일련번호로 도서 조회
+		Book book = BookService.getInstance().get(serialNum);
+		
+		if (resultBox != null) {
+			contentBox.remove(resultBox);
+		}
+		
 		int width = getWidth(); // 기준 너비
 		
-		JPanel resultBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		resultBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		resultBox.setBackground(Color.WHITE);
 		String[] label = { "일련번호", "대여상태", "대여기간", "도서명", "출판사", "저자" };
 	
@@ -164,8 +164,8 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 			}
 		}
 		
-		contentBox.add(resultBox, BorderLayout.CENTER);
 		
+		contentBox.add(resultBox, BorderLayout.CENTER);
 		/*
 		 * 대기중이라면 대여하기 버튼 노출 
 		 * 대여중이라면 반납하기 노출
