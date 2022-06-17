@@ -1,7 +1,10 @@
 package com.codefty.library.book;
 
 import java.io.Serializable;
+import java.time.*;
+
 import com.codefty.library.common.RentalStatus;
+
 
 /**
  * Book DTO(Data Transfer Object)
@@ -18,6 +21,8 @@ public class Book implements Serializable {
 	private String author; // 저자
 	private int rentalDays; // 도서의 대출 가능 일수 
 	private RentalStatus status; // 대여 상태 
+	private LocalDate rentalStartDate; // 대여 시작일 
+	private LocalDate rentalEndDate; // 대여 종료일
 	
 	public Book(long serialNum, String title, String publisher, String author, int rentalDays) {
 		this.serialNum = serialNum;
@@ -83,6 +88,22 @@ public class Book implements Serializable {
 
 	public void setStatus(RentalStatus status) {
 		this.status = status;
+	}
+
+	public LocalDate getRentalStartDate() {
+		return rentalStartDate;
+	}
+
+	public void setRentalStartDate(LocalDate rentalStartDate) {
+		this.rentalStartDate = rentalStartDate;
+	}
+
+	public LocalDate getRentalEndDate() {
+		return rentalEndDate;
+	}
+
+	public void setRentalEndDate(LocalDate rentalEndDate) {
+		this.rentalEndDate = rentalEndDate;
 	}
 
 	@Override

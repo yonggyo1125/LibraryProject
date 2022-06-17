@@ -8,5 +8,5 @@ import com.codefty.library.book.Book;
  * @author YONGGYO
  */
 public interface ReturnBook {
-	boolean returnBook(Book book);
+	void returnBook(Book book);
 }

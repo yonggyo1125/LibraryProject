@@ -57,7 +57,7 @@ public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 	 * @param Book book
 	 * @throws BookNotExistsException
 	 */
-	private void isBookExists(Book book) {
+	public void isBookExists(Book book) {
 		isBookExists(book.getSerialNum());
 	}
 	
@@ -67,7 +67,7 @@ public class BookService implements DeleteBook, RegisterBook,  UpdateBook {
 	 * @param serialNum
 	 * @throws BookNotExistsException
 	 */
-	private void isBookExists(long serialNum) {
+	public void isBookExists(long serialNum) {
 		if (!bookDao.isBookExists(serialNum)) {
 			throw new BookNotExistsException(null);
 		}

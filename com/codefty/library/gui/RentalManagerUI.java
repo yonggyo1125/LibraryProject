@@ -7,6 +7,7 @@ import javax.swing.border.*;
 
 import com.codefty.library.book.*;
 import com.codefty.library.common.*;
+import com.codefty.library.rental.RentalService;
 
 /**
  * 도서 대여, 반납 UI
@@ -20,6 +21,7 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 	JLabel serialNumTxt, statusTxt, bookTitle, publisher, author, rentalDays;
 	JButton searchBtn, actionBtn;
 
+	private long serialNum; // 도서 일련 번호
 	
 	public RentalManagerUI() {
 		super(new BorderLayout());
@@ -66,15 +68,19 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 					return;
 				}
 				
-				/** 도서 대여, 반납 담당자가 처리하는 부분 ... */
+				RentalService rentalService = RentalService.getInstance();
 				switch(status) {
 					case "대기하기":
+						rentalService.readyBook(serialNum);
 						break;
 					case "대여하기":
+						rentalService.rentBook(serialNum);
 						break;
 					case "반납하기":
+						rentalService.returnBook(serialNum);
 						break;
 					case "검수하기":
+						rentalService.checkingBook(serialNum);
 						break;
 				}
 				
@@ -95,7 +101,6 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 			throw new CommonException(this, "조회할 일련번호를 입력하세요.");
 		}
 		
-		long serialNum;
 		try {
 			serialNum = Long.parseLong(serialNumStr.trim());
 		} catch (NumberFormatException e) {
@@ -136,12 +141,13 @@ public class RentalManagerUI extends JPanel implements ActionListener {
 					resultBox.add(statusTxt);
 					break;
 				case 2 : 
-					// 대여, 반납 기능 구현 담당자가 처리해 주세요.
+					// 대여 가능일, 대여기간 표기
 					if (book.getStatus() == RentalStatus.READY) {
 						rentalPeriods = "대여일로 부터 " + book.getRentalDays() + "일간";
 					} else {
-						rentalPeriods = "렌탈 기간...";
+						rentalPeriods = book.getRentalStartDate().toString() + "~" + book.getRentalEndDate().toString();
 					}
+					
 					rentalDays = new JLabel(rentalPeriods);
 					rentalDays.setPreferredSize(d);
 					resultBox.add(rentalDays);
